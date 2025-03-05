@@ -1,0 +1,48 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    id          String           @id @default(cuid())
+    nick        String           @unique
+    email       String           @unique
+    password    String
+    createdAt   DateTime         @default(now())
+    pins        Pin[]
+    pinsLikes   PinLike[]
+    permissions UserPermission[]
+}
+
+enum UserPermission {
+    BLOCK_IDEAS
+    ALL
+}
+
+model Pin {
+    id           String    @id @default(uuid())
+    title        String    @unique
+    serialNumber Int       @unique @default(autoincrement())
+    description  String
+    image        String
+    createdAt    DateTime  @default(now())
+    authorId     String
+    author       User      @relation(fields: [authorId], references: [id])
+    pinsLikes    PinLike[]
+    blockedAt    DateTime?
+}
+
+model PinLike {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    pin       Pin      @relation(fields: [pinId], references: [id])
+    pinId     String
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+
+    @@unique([pinId, userId])
+}

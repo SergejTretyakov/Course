@@ -1,0 +1,58 @@
+@use '../../../styles/vars' as *;
+
+.gallery {
+  display: flex;
+  margin-left: -10px; // Компенсация для промежутков между колонками
+  width: auto;
+}
+
+.masonryColumn {
+  padding-left: 10px; // Промежутки между колонками
+  background-clip: padding-box;
+}
+
+.pin {
+  margin-bottom: 10px; // Промежутки между элементами
+  position: relative;
+  border-radius: $defaultBorderRadius;
+  overflow: hidden;
+
+  .save {
+    position: absolute;
+    z-index: 10;
+    right: 15px;
+    top: 15px;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: $white;
+    background-color: $red;
+    border: none;
+    visibility: hidden;
+    transition: visibility 0.3s;
+  }
+
+  .image {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s;
+    border-radius: $defaultBorderRadius;
+  }
+  .more {
+    margin-top: 15px;
+    width: 300px;
+    height: 50px;
+  }
+
+  &:hover {
+    .save {
+      visibility: visible;
+    }
+    .image {
+      transition: filter 0.3s;
+      filter: brightness(50%);
+    }
+  }
+}

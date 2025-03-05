@@ -1,0 +1,90 @@
+@use '../../../styles/mixins' as *;
+@use '../../../styles/vars' as *;
+
+$breakpoint: '<=1300px';
+$phone: '<=751px';
+
+.pin {
+  display: flex;
+  flex-direction: row;
+  justify-self: center;
+  height: 100%;
+  width: 70%;
+  align-items: center;
+  @include media($breakpoint) {
+    width: 90%;
+    .info {
+      width: 50% !important;
+    }
+    .image {
+      width: 50% !important;
+    }
+  }
+  @include media($phone) {
+    flex-direction: column;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80%;
+    width: 43%;
+    border-radius: 0px 24px 24px 0px;
+    border: solid 0.1px rgb(201, 201, 201);
+    h1 {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    h4 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    p {
+      flex-grow: 1;
+      overflow-wrap: break-word;
+    }
+    .author {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+  .image {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    justify-content: space-between;
+    width: auto;
+    background-color: aqua;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px 0px 0px 24px;
+    overflow: hidden;
+    img {
+      max-width: 100%; // Ограничиваем ширину изображения
+      max-height: 100%; // Ограничиваем высоту изображения
+      object-fit: contain; // Сохраняем пропорции изображения
+      background-color: aqua;
+      z-index: 0;
+    }
+    h4 {
+      font-size: 16px;
+    }
+  }
+  .editButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .likeButton {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: min-content;
+    display: flex;
+  }
+  .likeIcon {
+    color: $red;
+  }
+}
